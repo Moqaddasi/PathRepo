@@ -1,5 +1,3 @@
-import { NextApiRequest, NextApiResponse } from "next";
-
 const GITHUB_API_URL = "https://api.github.com/repos";
 
 async function fetchRepoFiles(owner, repo, path = "") {
