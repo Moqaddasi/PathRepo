@@ -171,7 +171,7 @@ export default function Home() {
               </div>
             </div>
             <p className="mt-4 text-gray-600">
-              Full-stack developer with expertise in building web applications and GitHub repository tools. Feel free to connect with me on LinkedIn or check out my projects on GitHub.
+              Software Engineer | Feel free to connect with me on LinkedIn or check out my projects on GitHub.
             </p>
           </div>
         </div>
