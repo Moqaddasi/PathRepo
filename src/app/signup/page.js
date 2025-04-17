@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { app } from '../firebase/config';
 
 export default function SignUpPage() {
@@ -21,14 +21,19 @@ export default function SignUpPage() {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
+            // Update the user's profile with the displayName
+            await updateProfile(userCredential.user, { displayName: name });
+
             // Successfully signed up
             document.cookie = `user=${encodeURIComponent(JSON.stringify({
                 uid: userCredential.user.uid,
                 email: userCredential.user.email,
-                name: name
+                displayName: name
             }))}; path=/; secure; samesite=strict`;
 
             console.log('Sign up successful, redirecting...');
+            console.log(`User ${name} with email ${email} has been successfully registered.`);
+            window.location.href = 'login';
         } catch (err) {
             console.error('Error:', err.message);
             setError(err.message);
