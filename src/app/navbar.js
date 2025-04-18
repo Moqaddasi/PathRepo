@@ -27,14 +27,14 @@ export default function NavBar() {
                 />
             </Link>
             <Link href="/" style={{ textDecoration: "none", color: "#000", fontWeight: "bold" }}>Home</Link>
-            <Link href='archMenu' className='text-black'>Arch</Link>
-            <Link href='repoFileExplorer' className='text-black'>Repo File Explorer</Link>
+            <Link href='archMenu' className='text-black'>Architecture</Link>
+            <Link href='repoFileExplorer' className='text-black'>
+                Repository Explorer</Link>
             {userName.length ?
 
                 <>
 
-                    <p className='text-black'>{`Hello ${userName}`}</p>
-                    <Link href='/createArch' style={{ textDecoration: "none", color: "#000", fontWeight: "bold" }}>create Arch</Link>
+                    <p className='text-rose-800'>{`Hello ${userName}`}</p>
 
                 </>
 
