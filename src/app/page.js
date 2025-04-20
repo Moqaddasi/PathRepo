@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import cyberHandImage from '../../assets/cyberHand.png';
 
 export default function Home() {
     return (
@@ -39,8 +39,7 @@ export default function Home() {
             {/* Features Section */}
             <section className="py-16 bg-white text-black">
                 <div className="grid md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto px-6">
-                    <Image src="/images/professional.png" alt="Professional" width={400} height={400} />
-
+                    <Image src={cyberHandImage} alt="Professional" width={400} height={400} />
                     <div>
                         <h4 className="text-sm text-yellow-500 font-bold mb-2">FUTURE-READY</h4>
                         <h3 className="text-3xl font-bold mb-4">Transform Applications with Scalable Architecture</h3>

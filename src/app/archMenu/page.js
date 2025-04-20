@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { collection, onSnapshot, query, orderBy, limit } from 'firebase/firestore';
 import { db } from '../firebase/config';
+import ReactMarkdown from 'react-markdown';
+
 
 export default function ArchPatternGallery() {
     const [patterns, setPatterns] = useState([]);
@@ -165,9 +167,26 @@ export default function ArchPatternGallery() {
 
                                     <h2 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-2">{pattern.title}</h2>
 
-                                    <p className="text-gray-600 mb-4 line-clamp-3">
+                                    <ReactMarkdown
+                                        components={{
+                                            h1: ({ node, ...props }) => <h1 className="text-l font-bold text-gray-900 mt-6 mb-4" {...props} />,
+                                            h2: ({ node, ...props }) => <h2 className="text-l font-semibold text-gray-800 mt-5 mb-3" {...props} />,
+                                            h3: ({ node, ...props }) => <h3 className="text-xl font-medium text-gray-800 mt-4 mb-2" {...props} />,
+                                            p: ({ node, ...props }) => <p className="text-gray-700 my-4 leading-relaxed" {...props} />,
+                                            ul: ({ node, ...props }) => <ul className="list-disc pl-6 my-4 text-gray-700" {...props} />,
+                                            ol: ({ node, ...props }) => <ol className="list-decimal pl-6 my-4 text-gray-700" {...props} />,
+                                            li: ({ node, ...props }) => <li className="my-1" {...props} />,
+                                            a: ({ node, ...props }) => <a className="text-blue-600 hover:text-blue-800 underline font-medium" {...props} />,
+                                            blockquote: ({ node, ...props }) => <blockquote className="pl-4 border-l-4 border-gray-200 italic my-4 text-gray-700" {...props} />,
+                                            code: ({ node, inline, ...props }) =>
+                                                inline ?
+                                                    <code className="bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-sm font-mono" {...props} /> :
+                                                    <code {...props} />,
+                                            pre: ({ node, ...props }) => <pre className="bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto my-4 text-sm font-mono" {...props} />
+                                        }}
+                                    >
                                         {getExcerpt(pattern.description)}
-                                    </p>
+                                    </ReactMarkdown>
 
                                     <div className="flex flex-wrap gap-1 mt-2 mb-4">
                                         {pattern.tags?.slice(0, 3).map((tag, index) => (

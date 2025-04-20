@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 
 export default function PatternDetail({ params }) {
     const [pattern, setPattern] = useState(null);
@@ -54,12 +55,6 @@ export default function PatternDetail({ params }) {
             month: 'long',
             day: 'numeric'
         });
-    };
-
-    // Format paragraphs with proper line breaks
-    const formatContent = (content) => {
-        if (!content) return [];
-        return content.split('\n').filter(paragraph => paragraph.trim() !== '');
     };
 
     if (loading) {
@@ -157,15 +152,36 @@ export default function PatternDetail({ params }) {
                         </div>
                     )}
 
-                    {/* Article Content */}
+                    {/* Article Content - Fixed markdown styling with Tailwind */}
                     <div className="px-6 py-8">
-                        <div className="prose prose-blue prose-lg max-w-none">
-                            {formatContent(pattern.description).map((paragraph, index) => (
-                                <p key={index} className="mb-6 text-gray-800 leading-relaxed">
-                                    {paragraph}
-                                </p>
-                            ))}
-                        </div>
+                        {pattern.description ? (
+                            <div className="text-gray-800">
+                                <div className="prose prose-slate max-w-none">
+                                    <ReactMarkdown
+                                        components={{
+                                            h1: ({ node, ...props }) => <h1 className="text-3xl font-bold text-gray-900 mt-6 mb-4" {...props} />,
+                                            h2: ({ node, ...props }) => <h2 className="text-2xl font-semibold text-gray-800 mt-5 mb-3" {...props} />,
+                                            h3: ({ node, ...props }) => <h3 className="text-xl font-medium text-gray-800 mt-4 mb-2" {...props} />,
+                                            p: ({ node, ...props }) => <p className="text-gray-700 my-4 leading-relaxed" {...props} />,
+                                            ul: ({ node, ...props }) => <ul className="list-disc pl-6 my-4 text-gray-700" {...props} />,
+                                            ol: ({ node, ...props }) => <ol className="list-decimal pl-6 my-4 text-gray-700" {...props} />,
+                                            li: ({ node, ...props }) => <li className="my-1" {...props} />,
+                                            a: ({ node, ...props }) => <a className="text-blue-600 hover:text-blue-800 underline font-medium" {...props} />,
+                                            blockquote: ({ node, ...props }) => <blockquote className="pl-4 border-l-4 border-gray-200 italic my-4 text-gray-700" {...props} />,
+                                            code: ({ node, inline, ...props }) =>
+                                                inline ?
+                                                    <code className="bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-sm font-mono" {...props} /> :
+                                                    <code {...props} />,
+                                            pre: ({ node, ...props }) => <pre className="bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto my-4 text-sm font-mono" {...props} />
+                                        }}
+                                    >
+                                        {pattern.description}
+                                    </ReactMarkdown>
+                                </div>
+                            </div>
+                        ) : (
+                            <p className="text-gray-700 italic">No content available</p>
+                        )}
                     </div>
 
                     {/* Article Footer */}
@@ -188,13 +204,6 @@ export default function PatternDetail({ params }) {
                                 >
                                     Print
                                 </button>
-
-                                {/* <Link
-                                    href={`/edit/${pattern.id}`}
-                                    className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-                                >
-                                    Edit Pattern
-                                </Link> */}
                             </div>
                         </div>
                     </div>
