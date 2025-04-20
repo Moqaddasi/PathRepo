@@ -23,7 +23,7 @@ export default function ArchPatternGallery() {
                 const patternsArray = querySnapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data(),
-                    // Make sure createdAt is serializable
+
                     createdAt: doc.data().createdAt?.toDate?.() || new Date()
                 }));
                 setPatterns(patternsArray);
@@ -38,8 +38,6 @@ export default function ArchPatternGallery() {
         // Cleanup subscription on unmount
         return () => unsubscribe();
     }, []);
-    console.log(patterns);
-    // Filter patterns based on category and search term
     const filteredPatterns = patterns.filter(pattern => {
         const matchesCategory = selectedCategory === 'all' || pattern.category === selectedCategory;
         const matchesSearch = searchTerm === '' ||
@@ -53,7 +51,6 @@ export default function ArchPatternGallery() {
     // Extract all unique categories from patterns
     const categories = ['all', ...new Set(patterns.map(pattern => pattern.category).filter(Boolean))];
 
-    // Format relative time
     const formatRelativeTime = (date) => {
         if (!date) return '';
 
@@ -106,7 +103,7 @@ export default function ArchPatternGallery() {
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 placeholder="Search patterns..."
-                                className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:border-blue-500 focus:ring-blue-500"
+                                className="w-full pl-4 pr-10 py-2 border border-gray-300 text-black rounded-lg focus:outline-none focus:ring-2 focus:border-blue-500 focus:ring-blue-500"
                             />
                             {searchTerm && (
                                 <button
@@ -190,7 +187,7 @@ export default function ArchPatternGallery() {
                                             {formatRelativeTime(pattern.createdAt)}
                                         </span>
                                         <Link
-                                            href={`/pattern/${pattern.id}`}
+                                            href={`/archMenu/${pattern.id}`}
                                             className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                                         >
                                             Read more →
