@@ -87,10 +87,10 @@ export default function ArchPatternGallery() {
                             <p className="mt-1 text-gray-500">Browse and learn from architecture pattern examples</p>
                         </div>
                         <div className="mt-4 md:mt-0 flex space-x-3">
-                            <Link href="/upload"
+                            {/* <Link href="/upload"
                                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                 Create New Pattern
-                            </Link>
+                            </Link> */}
                             <Link href="/repoFileExplorer"
                                 className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                 Repository Explorer

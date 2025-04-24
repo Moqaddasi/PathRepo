@@ -10,7 +10,7 @@ export default function Upload() {
         title: '',
         description: '',
         tags: '',
-        category: 'general'
+        category: 'PresentationPatterns'
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);

@@ -21,14 +21,14 @@ export default function NavBar() {
                 <Image
                     src="/logo.png"
                     alt="Logo"
-                    width={40}
-                    height={40}
+                    width={80}
+                    height={80}
                     priority
                 />
             </Link>
             <Link href="/" style={{ textDecoration: "none", color: "#000", fontWeight: "bold" }}>Home</Link>
-            <Link href='archMenu' className='text-black'>Architecture</Link>
-            <Link href='repoFileExplorer' className='text-black'>
+            <Link href='/archMenu' className='text-black'>Architecture</Link>
+            <Link href='/repoFileExplorer' className='text-black'>
                 Repository Explorer</Link>
             {userName.length ?
 
