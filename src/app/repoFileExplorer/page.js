@@ -18,7 +18,6 @@ const directoryColors = {
     assets: "text-amber-600 dark:text-amber-400",
 };
 
-// Architecture patterns based on directory structure
 
 const buildFileTree = (paths) => {
     const root = {};
