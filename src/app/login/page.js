@@ -46,7 +46,7 @@ export default function LoginPage() {
             }))}; path=/; secure; samesite=strict`;
 
             console.log('Login successful, redirecting...');
-            // window.location.href = '/'; // Redirect if needed
+            window.location.href = '/';
         } catch (err) {
             console.error('Error:', err.message);
             setError(err.message);
