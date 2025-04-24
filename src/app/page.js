@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import cyberHandImage from '../../assets/cyberHand.png';
-import roboTech from '../../assets/roboTech.png';
 
 export default function Home() {
     return (

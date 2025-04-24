@@ -1,4 +1,5 @@
 "use client";
+import logo from '../../assets/logo.png';
 
 import React, { useState } from 'react';
 import Image from 'next/image';
@@ -19,7 +20,7 @@ export default function NavBar() {
         <nav style={{ display: "flex", alignItems: "center", gap: "1rem", padding: "1rem", background: "#f5f5f5", borderBottom: "1px solid #ddd" }}>
             <Link href="/">
                 <Image
-                    src="/logo.png"
+                    src={logo}
                     alt="Logo"
                     width={80}
                     height={80}
