@@ -19,39 +19,6 @@ const directoryColors = {
 };
 
 // Architecture patterns based on directory structure
-const detectArchitecturePattern = (paths) => {
-    const directories = new Set();
-
-    paths.forEach(path => {
-        const parts = path.split('/');
-        if (parts.length > 1) {
-            directories.add(parts[0].toLowerCase());
-        }
-    });
-
-    const dirArray = Array.from(directories);
-
-    // Check for common architecture patterns
-    if (dirArray.includes('pages') && dirArray.includes('components')) {
-        return "Next.js or similar page-based framework";
-    } else if (dirArray.includes('src') && (dirArray.includes('components') || dirArray.includes('containers'))) {
-        return "React Component-Based Architecture";
-    } else if (dirArray.includes('src') && dirArray.includes('features')) {
-        return "Feature-Based Architecture (possibly Redux Toolkit)";
-    } else if (dirArray.includes('src') && dirArray.includes('views')) {
-        return "MVC or MVVM Pattern";
-    } else if (dirArray.includes('public') && dirArray.includes('src')) {
-        return "Standard React/Frontend Application";
-    } else if (dirArray.includes('controllers') && dirArray.includes('models')) {
-        return "MVC Backend Architecture";
-    } else if (dirArray.includes('api') && dirArray.includes('services')) {
-        return "Service-Based Architecture";
-    } else if (dirArray.includes('packages') || dirArray.includes('modules')) {
-        return "Monorepo or Modular Architecture";
-    }
-
-    return "Standard Project Structure";
-};
 
 const buildFileTree = (paths) => {
     const root = {};
@@ -135,7 +102,6 @@ export default function RepoFileExplorer() {
     const [error, setError] = useState("");
     const [copySuccess, setCopySuccess] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
-    const [architecturePattern, setArchitecturePattern] = useState("");
 
     // Initialize dark mode based on system preference
     useEffect(() => {
@@ -265,14 +231,7 @@ export default function RepoFileExplorer() {
 
             {error && <p className="text-red-500 mb-4">{error}</p>}
 
-            {architecturePattern && (
-                <div className="w-full max-w-4xl bg-white dark:bg-gray-800 rounded shadow p-4 mb-4">
-                    <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-2">Project Architecture</h2>
-                    <p className="text-gray-600 dark:text-gray-300">
-                        Based on the directory structure, this appears to be a: <span className="font-bold">{architecturePattern}</span>
-                    </p>
-                </div>
-            )}
+
 
             <div className="w-full max-w-4xl bg-white dark:bg-gray-800 rounded shadow p-4">
                 <div className="flex justify-between items-center mb-4">
