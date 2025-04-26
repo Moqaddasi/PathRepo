@@ -47,14 +47,11 @@ const FileTree = ({ tree, repoUrl }) => {
                 const path = value.path;
                 const isDirectory = !isFile;
 
-                // Determine if this is a special directory that should have a color
                 const dirName = key.toLowerCase();
                 const colorClass = isDirectory && directoryColors[dirName] ? directoryColors[dirName] : "text-gray-800 dark:text-gray-200";
 
-                // Icon based on type
                 const iconClass = isDirectory ? "folder" : "file";
 
-                // Build GitHub URL for this item
                 const githubUrl = `${repoUrl}/blob/master/${path}`;
 
                 return (
@@ -102,14 +99,11 @@ export default function RepoFileExplorer() {
     const [copySuccess, setCopySuccess] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
 
-    // Initialize dark mode based on system preference
     useEffect(() => {
-        // Check for system preference
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             setDarkMode(true);
         }
 
-        // Listen for changes
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         const handleChange = (e) => setDarkMode(e.matches);
 
@@ -117,7 +111,6 @@ export default function RepoFileExplorer() {
         return () => mediaQuery.removeEventListener('change', handleChange);
     }, []);
 
-    // Set proper classes when dark mode changes
     useEffect(() => {
         if (darkMode) {
             document.documentElement.classList.add('dark');
@@ -135,16 +128,13 @@ export default function RepoFileExplorer() {
         setError("");
         setFilePaths([]);
         setCopySuccess(false);
-        setArchitecturePattern("");
 
-        // Clean up the repo URL to get the base URL
         let cleanRepoUrl = repoUrl;
         if (cleanRepoUrl.includes("/blob/")) {
             cleanRepoUrl = cleanRepoUrl.split("/blob/")[0];
         } else if (cleanRepoUrl.includes("/tree/")) {
             cleanRepoUrl = cleanRepoUrl.split("/tree/")[0];
         }
-        // Remove trailing slash if present
         cleanRepoUrl = cleanRepoUrl.replace(/\/$/, "");
 
         try {
@@ -155,9 +145,6 @@ export default function RepoFileExplorer() {
                 setError(data.error);
             } else {
                 setFilePaths(data.files);
-                // Detect architecture pattern
-                const pattern = detectArchitecturePattern(data.files);
-                setArchitecturePattern(pattern);
             }
         } catch (err) {
             setError("Failed to fetch files");
