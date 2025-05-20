@@ -65,13 +65,6 @@ export default function NavBar() {
                     {/* User section and mobile menu button */}
                     <div className="flex items-center">
                         <div className="hidden md:block">
-                            {userName.length ? (
-                                <p className="text-rose-800 font-medium">{`Hello ${userName}`}</p>
-                            ) : (
-                                <Link href="/login" className="px-4 py-2 text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors">
-                                    Login
-                                </Link>
-                            )}
                         </div>
 
                         {/* Mobile menu button */}
@@ -112,18 +105,7 @@ export default function NavBar() {
                     <Link href="/repoFileExplorer" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-600">
                         Repository Explorer
                     </Link>
-                    {/* Show login link in mobile menu if user is not logged in */}
-                    {!userName.length && (
-                        <Link href="/login" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-600">
-                            Login
-                        </Link>
-                    )}
-                    {/* Show user greeting in mobile menu if logged in */}
-                    {userName.length > 0 && (
-                        <div className="px-3 py-2 text-rose-800 font-medium">
-                            {`Hello ${userName}`}
-                        </div>
-                    )}
+
                 </div>
             </div>
         </nav>
